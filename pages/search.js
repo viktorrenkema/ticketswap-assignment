@@ -10,15 +10,16 @@ const SubTitle = styled.h3`
   margin-bottom: ${space[16]};
 `
 
-const Events = () => (
-  <>
-    <Container>
-      <Input id="eventquery" label="Which event are you looking for?" />
-      <SubTitle>All events</SubTitle>
-      <AllEvents></AllEvents>
-    </Container>
-    <Footer />
-  </>
-)
+const Search = () => {
+  return (
+    <>
+      <Container>
+        <SubTitle>All events</SubTitle>
+        <AllEvents></AllEvents>
+      </Container>
+      <Footer />
+    </>
+  )
+}
 
-export default Events
+export default Search

@@ -13,8 +13,9 @@ export const resolvers = {
       return events.find(event => event.id === id) || null
     },
     allEvents(_parent, args, _context, _info) {
-      const { id } = args
-
+      const { name } = args
+      console.log('args', args)
+      // if (name) return _context.db.event.filter(e => e.name == name)
       return events
     },
   },

@@ -14,7 +14,7 @@ export const typeDefs = gql`
     event(id: Int!): Event
   }
   type Query {
-    allEvents(first: Int!): [Event!]!
+    allEvents(first: Int!, name: String): [Event!]!
     event(id: Int!): Event
   }
 `
