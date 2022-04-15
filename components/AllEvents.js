@@ -2,7 +2,7 @@ import React from 'react'
 import { useQuery } from '@apollo/client'
 import { Card, space, Spinner } from '@ticketswap/solar'
 import styled from '@emotion/styled'
-import getPopularEvents from '~/graphql/queries/getPopularEvents'
+import getAllEvents from '~/graphql/queries/getAllEvents'
 import Link from 'next/link'
 
 const Wrapper = styled.div`
@@ -11,10 +11,10 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(2, 1fr);
 `
 
-const PopularEvents = () => {
-  const { loading, data } = useQuery(getPopularEvents, {
+const AllEvents = () => {
+  const { loading, data } = useQuery(getAllEvents, {
     variables: {
-      first: 6,
+      first: 200,
     },
   })
 
@@ -26,11 +26,11 @@ const PopularEvents = () => {
     )
   }
 
-  const { popularEvents } = data
+  const { allEvents } = data
 
   return (
     <Wrapper>
-      {popularEvents.map(({ id, name, location, date, imageUrl }) => (
+      {allEvents.map(({ id, name, location, date, imageUrl }) => (
         <Link key={id} href={`/event/${id}`} passHref>
           <a>
             <Card
@@ -45,4 +45,4 @@ const PopularEvents = () => {
   )
 }
 
-export default PopularEvents
+export default AllEvents

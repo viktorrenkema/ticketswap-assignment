@@ -11,6 +11,11 @@ export const resolvers = {
       const { id } = args
 
       return events.find(event => event.id === id) || null
-    }
+    },
+    allEvents(_parent, args, _context, _info) {
+      const { id } = args
+
+      return events
+    },
   },
 }
