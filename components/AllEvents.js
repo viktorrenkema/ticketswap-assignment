@@ -5,11 +5,12 @@ import styled from '@emotion/styled'
 import getAllEvents from '~/graphql/queries/getAllEvents'
 import Link from 'next/link'
 import { useDebounce } from '~/lib/useDebounce'
+import { MagnifyingGlass } from '@ticketswap/solar/icons'
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-gap: ${space[16]};
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  gap: ${space[16]};
+  flex-wrap: wrap;
 `
 
 function useSearchFilter() {
@@ -70,24 +71,31 @@ const AllEvents = () => {
   // }
 
   return (
-    <Wrapper>
+    <>
       <Input
         onChange={event => setQuery(event.target.value)}
-        id="eventquery"
-        label="Which event are you looking for?"
+        placeholder="Search our docs"
+        id="search"
+        label="Search"
+        hideLabel
+        leftAdornment={<MagnifyingGlass size={24} />}
       />
-      {allEvents.map(({ id, name, location, date, imageUrl }) => (
-        <Link key={id} href={`/event/${id}`} passHref>
-          <a>
-            <Card
-              title={name}
-              subtitle={`${location} - ${new Date(date).toLocaleDateString()}`}
-              image={imageUrl}
-            />
-          </a>
-        </Link>
-      ))}
-    </Wrapper>
+      <Wrapper>
+        {allEvents.map(({ id, name, location, date, imageUrl }) => (
+          <Link key={id} href={`/event/${id}`} passHref>
+            <a>
+              <Card
+                title={name}
+                subtitle={`${location} - ${new Date(
+                  date
+                ).toLocaleDateString()}`}
+                image={imageUrl}
+              />
+            </a>
+          </Link>
+        ))}
+      </Wrapper>
+    </>
   )
 }
 
