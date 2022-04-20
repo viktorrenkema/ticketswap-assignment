@@ -74,7 +74,7 @@ const AllEvents = () => {
     <>
       <Input
         onChange={event => setQuery(event.target.value)}
-        placeholder="Search our docs"
+        placeholder="Search all events"
         id="search"
         label="Search"
         hideLabel
