@@ -13,25 +13,7 @@ const Wrapper = styled.div`
   flex-wrap: wrap;
 `
 
-function useSearchFilter() {
-  const [filters, _updateFilter] = React.useState({
-    name: undefined,
-  })
-
-  const updateFilter = (filterType, value) => {
-    _updateFilter({
-      [filterType]: value,
-    })
-  }
-
-  return {
-    models: { filters },
-    operations: { updateFilter },
-  }
-}
-
 const AllEvents = () => {
-  // const { operations, models } = useSearchFilter()
   const [query, setQuery] = React.useState('')
   const { loading, data, refetch } = useQuery(getAllEvents, {
     variables: {
@@ -43,9 +25,7 @@ const AllEvents = () => {
 
   React.useEffect(
     () => {
-      if (debouncedSearch) {
-        refetch({ name: debouncedSearch })
-      }
+      refetch({ name: debouncedSearch })
     },
     [debouncedSearch, refetch] // Only call effect if debounced search term changes
   )
@@ -59,16 +39,6 @@ const AllEvents = () => {
   }
 
   const { allEvents } = data
-
-  // const handleSearch = e => {
-  //   operations.updateFilter('name', e.target.value)
-  //   console.log('models.filters.name', typeof models.filters.name)
-  //   setTimeout(() => {
-  //     refetch({
-  //       nameInput: { first: 5, name: models.filters.name },
-  //     })
-  //   }, 1000)
-  // }
 
   return (
     <>
