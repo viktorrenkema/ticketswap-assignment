@@ -4,6 +4,7 @@ import { Card, space, Spinner, Input } from '@ticketswap/solar'
 import styled from '@emotion/styled'
 import getAllEvents from '~/graphql/queries/getAllEvents'
 import Link from 'next/link'
+import { useDebounce } from '~/lib/useDebounce'
 
 const Wrapper = styled.div`
   display: grid;
@@ -11,31 +12,42 @@ const Wrapper = styled.div`
   grid-template-columns: repeat(2, 1fr);
 `
 
-const AllEvents = () => {
-  function useSearchFilter() {
-    const [filters, _updateFilter] = React.useState({
-      name: undefined,
+function useSearchFilter() {
+  const [filters, _updateFilter] = React.useState({
+    name: undefined,
+  })
+
+  const updateFilter = (filterType, value) => {
+    _updateFilter({
+      [filterType]: value,
     })
-
-    const updateFilter = (filterType, value) => {
-      _updateFilter({
-        [filterType]: value,
-      })
-    }
-
-    return {
-      models: { filters },
-      operations: { updateFilter },
-    }
   }
 
-  const { operations, models } = useSearchFilter()
+  return {
+    models: { filters },
+    operations: { updateFilter },
+  }
+}
+
+const AllEvents = () => {
+  // const { operations, models } = useSearchFilter()
+  const [query, setQuery] = React.useState('')
   const { loading, data, refetch } = useQuery(getAllEvents, {
     variables: {
-      first: 100,
-      name: 'bla',
+      name: '',
     },
   })
+
+  const debouncedSearch = useDebounce(query, 500)
+
+  React.useEffect(
+    () => {
+      if (debouncedSearch) {
+        refetch({ name: debouncedSearch })
+      }
+    },
+    [debouncedSearch, refetch] // Only call effect if debounced search term changes
+  )
 
   if (loading) {
     return (
@@ -47,20 +59,20 @@ const AllEvents = () => {
 
   const { allEvents } = data
 
-  const handleSearch = e => {
-    operations.updateFilter('name', e.target.value)
-    console.log('models.filters.name', typeof models.filters.name)
-    setTimeout(() => {
-      refetch({
-        nameInput: { first: 100, name: models.filters.name },
-      })
-    }, 1000)
-  }
+  // const handleSearch = e => {
+  //   operations.updateFilter('name', e.target.value)
+  //   console.log('models.filters.name', typeof models.filters.name)
+  //   setTimeout(() => {
+  //     refetch({
+  //       nameInput: { first: 5, name: models.filters.name },
+  //     })
+  //   }, 1000)
+  // }
 
   return (
     <Wrapper>
       <Input
-        onChange={handleSearch}
+        onChange={event => setQuery(event.target.value)}
         id="eventquery"
         label="Which event are you looking for?"
       />

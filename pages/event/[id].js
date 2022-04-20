@@ -40,6 +40,7 @@ const Event = ({ eventId }) => {
 }
 
 export const getServerSideProps = async ({ params }) => {
+  console.log('params', params)
   return {
     props: {
       eventId: params.id,

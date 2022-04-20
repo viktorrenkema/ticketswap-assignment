@@ -1,4 +1,5 @@
 import { events } from './mock-data'
+import _ from 'lodash'
 
 export const resolvers = {
   Query: {
@@ -7,16 +8,23 @@ export const resolvers = {
 
       return events.slice(0, first)
     },
+
     event(_parent, args, _context, _info) {
       const { id } = args
 
       return events.find(event => event.id === id) || null
     },
+
     allEvents(_parent, args, _context, _info) {
       const { name } = args
-      console.log('args', args)
-      // if (name) return _context.db.event.filter(e => e.name == name)
-      return events
+
+      if (name) {
+        var filteredEvents = _.filter(events, event => {
+          return event.name.indexOf(name) > -1
+        })
+
+        return filteredEvents
+      } else return events
     },
   },
 }
