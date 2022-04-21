@@ -1,38 +1,70 @@
 import React from 'react'
 import Container from '~/components/Container'
+import { useQuery } from '@apollo/client'
+import getAllEvents from '~/graphql/queries/getAllEvents'
+import { useDebounce } from '~/lib/useDebounce'
+import Cover from '~/components/Cover'
 import Footer from '~/components/Footer'
-import { H1, space, sizes } from '@ticketswap/solar'
+import { space, sizes, Card, Spinner } from '@ticketswap/solar'
+import { WarningRounded } from '@ticketswap/solar/icons'
 import styled from '@emotion/styled'
 import AllEvents from '~/components/AllEvents'
+
+const Wrapper = styled.div`
+  display: flex;
+  gap: ${space[16]};
+  flex-wrap: wrap;
+  justify-content: center;
+`
 
 const SearchPageContainer = styled.main`
   padding: 0 ${space[16]};
   margin: ${space[16]} auto;
-  max-width: ${sizes.laptopL}px;
+  max-width: ${sizes.laptop}px;
   display: flex;
   flex-direction: column;
   gap: ${space[32]};
 `
 
 const Search = () => {
+  const [query, setQuery] = React.useState('')
+
+  const { loading, data, refetch } = useQuery(getAllEvents, {
+    variables: {
+      name: '',
+    },
+  })
+
+  const debouncedSearch = useDebounce(query, 500)
+
+  React.useEffect(
+    () => {
+      refetch({ name: debouncedSearch })
+    },
+    [debouncedSearch, refetch] // Only call effect if debounced search term changes
+  )
+
+  if (loading) {
+    return (
+      <Wrapper>
+        <Spinner />
+      </Wrapper>
+    )
+  }
+
+  const { allEvents } = data
+
   return (
     <>
+      <Cover page="search" setQuery={setQuery}></Cover>
       <SearchPageContainer>
-        {/* <Cover
-          fullHeight
-          caption={'Confetti and light show at a festival'}
-          captionUrl={'Confetti and light show at a festival'}
-          images={
-            'https://cdn.ticketswap.com/public/202106/6c79cde4-0e56-4abf-a88d-96e64060cadd.dc57f787362f4ba50df3be9ada97644a2539e90a.jpeg'
-          }
-        >
-          <Title>Search for upcoming events</Title>
-        </Cover> */}
-        {/* <Cover imageUrl="https://cdn.ticketswap.com/public/202106/6c79cde4-0e56-4abf-a88d-96e64060cadd.dc57f787362f4ba50df3be9ada97644a2539e90a.jpeg">
-          <Title>Awakenings Festival 2019</Title>
-        </Cover> */}
-        <H1>All events</H1>
-        <AllEvents></AllEvents>
+        <Card
+          leftAdornment={<WarningRounded size={24} />}
+          title="Let op"
+          subtitle="Dit evenement heeft momenteel geen beschikbare kaarten. "
+          description="Zet een alert aan om op de hoogte te worden gehouden."
+        ></Card>
+        <AllEvents allEvents={allEvents}></AllEvents>
       </SearchPageContainer>
       <Footer />
     </>

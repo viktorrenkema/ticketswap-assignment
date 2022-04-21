@@ -1,14 +1,14 @@
 import React from 'react'
-import { TicketSwap } from '@ticketswap/solar/icons'
+import { TicketSwap, MagnifyingGlass } from '@ticketswap/solar/icons'
 import styled from '@emotion/styled'
 import {
   space,
   color,
   H1,
   H5,
-  Text,
   Image,
   shadow,
+  Input,
   Cover as SolarCover,
 } from '@ticketswap/solar'
 
@@ -28,7 +28,7 @@ const FpWrapper = styled.div`
   box-shadow: ${shadow.strong};
 `
 
-const Title = styled(H1)`
+export const Title = styled(H1)`
   color: ${color.lightForeground};
 `
 
@@ -50,14 +50,37 @@ const DetailsWrapper = styled.div`
 `
 
 const Cover = props => {
-  let { name, date, imageUrl = '', location } = props
+  let { page, name, date, imageUrl, location, setQuery } = props
 
-  if (!name) {
+  if (page === 'frontpage') {
     return (
       <FpWrapper>
         <TicketSwap size={64} />
         <Title>Ticketswap challenger</Title>
       </FpWrapper>
+    )
+  }
+
+  if (page === 'search') {
+    return (
+      <Wrapper>
+        <SolarCover imageUrl="https://cdn.ticketswap.com/public/201706/ab89e741-cc69-4c2e-88bc-3d4c807acef2.jpeg">
+          {/* <CoverDetailsWrapper> */}
+          <TicketSwap size={64} />
+          <Title>Zoek door alle evenementen</Title>
+          {/* <div style={{ height: 100, width: '100%', backgroundColor: '#09f' }}> */}
+          <Input
+            onChange={event => setQuery(event.target.value)}
+            placeholder="Zoek naar een event"
+            id="search"
+            label="Search"
+            hideLabel
+            leftAdornment={<MagnifyingGlass size={24} />}
+          />
+          {/* </div> */}
+          {/* </CoverDetailsWrapper> */}
+        </SolarCover>
+      </Wrapper>
     )
   }
 

@@ -27,7 +27,7 @@ const Emoji = styled.span`
 
 const Home = () => (
   <>
-    <Cover />
+    <Cover page="frontpage" />
     <Container>
       <Description as="p">
         <strong>Welcome to the TicketSwap challenger.</strong> The goal of this
