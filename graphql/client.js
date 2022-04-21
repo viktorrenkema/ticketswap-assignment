@@ -1,12 +1,15 @@
 import { useMemo } from 'react'
 import { ApolloClient, InMemoryCache } from '@apollo/client'
 
+export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
+
 let apolloClient
 
 function createIsomorphLink() {
   if (typeof window === 'undefined') {
     const { SchemaLink } = require('@apollo/client/link/schema')
     const { schema } = require('./schema')
+    console.log(schema)
     return new SchemaLink({ schema })
   } else {
     const { HttpLink } = require('@apollo/client/link/http')
@@ -44,4 +47,12 @@ export function initializeApollo(initialState = null) {
 export function useApollo(initialState) {
   const store = useMemo(() => initializeApollo(initialState), [initialState])
   return store
+}
+
+export function addApolloState(client, pageProps) {
+  if (pageProps?.props) {
+    pageProps.props[APOLLO_STATE_PROP_NAME] = client.cache.extract()
+  }
+
+  return pageProps
 }
