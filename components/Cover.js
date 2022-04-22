@@ -9,6 +9,7 @@ import {
   Image,
   shadow,
   Input,
+  device,
   Cover as SolarCover,
 } from '@ticketswap/solar'
 
@@ -30,6 +31,9 @@ const FpWrapper = styled.div`
 
 export const Title = styled(H1)`
   color: ${color.lightForeground};
+  @media ${device.tablet} {
+    font-size: 3.5rem;
+  }
 `
 
 const Detail = styled(H5)`
@@ -109,20 +113,9 @@ const Cover = props => {
 
   return (
     <Wrapper>
-      <SolarCover
-        blurred
-        imageUrl={imageUrl}
-        alt={`An image of the ${name} event.`}
-      >
+      <SolarCover imageUrl={imageUrl} alt={`An image of the ${name} event.`}>
         <CoverDetailsWrapper>
           <TicketSwap size={64} />
-          <Image
-            rounded
-            style={{ width: '254px', height: '143px' }}
-            // The style prop above is a workaround for now. Preferred would be setting Width and height as props directly, but these don't seem to be applied correctly, neither as strings.
-            src={imageUrl}
-            alt={`An image of the ${name} event.`}
-          />
           <DetailsWrapper>
             <Title>{name}</Title>
             <Detail>{location}</Detail>

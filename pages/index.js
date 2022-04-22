@@ -14,6 +14,16 @@ import styled from '@emotion/styled'
 import PopularEvents from '~/components/PopularEvents'
 import Link from 'next/link'
 
+const HeadingWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: ${space[32]};
+  margin-bottom: ${space[16]};
+`
+
+export { HeadingWrapper }
+
 const List = styled.ul`
   list-style: disc;
   margin-left: ${space[16]};
@@ -28,14 +38,6 @@ const SubTitle = styled.h3``
 
 const Emoji = styled.span`
   font-family: initial;
-`
-
-const HeadingWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: ${space[32]};
-  margin-bottom: ${space[16]};
 `
 
 const Home = () => (

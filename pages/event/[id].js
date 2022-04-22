@@ -3,23 +3,21 @@ import Container from '~/components/Container'
 import Cover from '~/components/Cover'
 import Footer from '~/components/Footer'
 import {
-  Tabs,
-  TabList,
-  TabPanel,
-  Tab,
-  TabPanels,
-  H3,
+  H2,
+  Button,
   space,
+  color,
   Alert,
   AlertVariant,
 } from '@ticketswap/solar'
 import { useQuery } from '@apollo/client'
 import getEvent from '~/graphql/queries/getEvent'
 import styled from '@emotion/styled'
+import { HeadingWrapper } from '~/pages/index'
+import TicketAlert from '~/components/TicketAlert'
 
-const TabContentContainer = styled.div`
-  /* padding: 0 ${space[16]}; */
-  margin: ${space[16]} auto;
+const Margin = styled.section`
+  margin-bottom: ${space[40]};
 `
 
 const Event = ({ eventId }) => {
@@ -37,47 +35,30 @@ const Event = ({ eventId }) => {
     <>
       <Cover name={name} date={date} imageUrl={imageUrl} location={location} />
       <Container>
-        <Tabs>
-          <TabList>
-            <Tab>
-              <H3>Informatie</H3>
-            </Tab>
-            <Tab>
-              <H3>Tickets</H3>
-            </Tab>
-          </TabList>
-          <TabPanels>
-            <TabPanel>
-              <TabContentContainer>
-                <Alert
-                  variant={AlertVariant.warning}
-                  action={{
-                    label: 'Activeer alert',
-                    onClick: () => console.log('Alert geactiveerd'),
-                  }}
-                >
-                  Dit evenement heeft momenteel geen beschikbare kaarten. Zet
-                  een alert aan om op de hoogte te worden gehouden.
-                </Alert>
-                <p>{description}</p>
-              </TabContentContainer>
-            </TabPanel>
-            <TabPanel>
-              <TabContentContainer>
-                <Alert
-                  variant={AlertVariant.warning}
-                  action={{
-                    label: 'Activeer alert',
-                    onClick: () => console.log('Alert geactiveerd'),
-                  }}
-                >
-                  Dit evenement heeft momenteel geen beschikbare kaarten. Zet
-                  een alert aan om op de hoogte te worden gehouden.
-                </Alert>
-              </TabContentContainer>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
+        <Alert
+          title="Let op"
+          variant={AlertVariant.warning}
+          action={{
+            label: 'Activeer alert',
+            onClick: () => console.log('Alert geactiveerd'),
+          }}
+        >
+          Dit evenement heeft momenteel geen beschikbare kaarten. Zet een alert
+          aan om op de hoogte te worden gehouden.
+        </Alert>
+        <HeadingWrapper>
+          <H2>Tickets</H2>
+          <Button size={'small'} variant={'primary'}>
+            Verkoop tickets
+          </Button>
+        </HeadingWrapper>
+        <Margin>
+          <TicketAlert></TicketAlert>
+        </Margin>
+        <HeadingWrapper>
+          <H2>Informatie</H2>
+        </HeadingWrapper>
+        <p>{description}</p>
       </Container>
       <Footer />
     </>
