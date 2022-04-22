@@ -44,14 +44,19 @@ const MY_QUERY = gql`
 
 export const getServerSideProps = async ({ params }) => {
   const client = initializeApollo()
-  await client.query({
-    query: MY_QUERY,
-    variables: {
-      id: parseInt(params.id),
-    },
-  })
 
-  return addApolloState(apolloClient, {
+  // console.log('query', MY_QUERY)
+
+  await client
+    .query({
+      query: MY_QUERY,
+      variables: {
+        id: parseInt(params.id),
+      },
+    })
+    .then(r => console.log('reso', r))
+
+  return addApolloState(client, {
     props: {},
   })
 }
