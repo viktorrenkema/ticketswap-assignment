@@ -1,7 +1,8 @@
+// Larger libraries
 import React from 'react'
-import Container from '~/components/Container'
-import Cover from '~/components/Cover'
-import Footer from '~/components/Footer'
+import styled from '@emotion/styled'
+
+// Components
 import {
   Collapsible,
   color,
@@ -10,19 +11,11 @@ import {
   space,
   BaseButton,
 } from '@ticketswap/solar'
-import styled from '@emotion/styled'
-import PopularEvents from '~/components/PopularEvents'
+import { Container, HeadingWrapper } from '~/components/orbit/layout'
+import Cover from '~/components/Cover'
+import Footer from '~/components/Footer'
 import Link from 'next/link'
-
-const HeadingWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: ${space[32]};
-  margin-bottom: ${space[16]};
-`
-
-export { HeadingWrapper }
+import PopularEvents from '~/components/PopularEvents'
 
 const List = styled.ul`
   list-style: disc;
@@ -33,8 +26,6 @@ const Description = styled(Text)`
   font-size: ${fontSize[18]};
   margin: ${space[32]} 0 ${space[16]};
 `
-
-const SubTitle = styled.h3``
 
 const Emoji = styled.span`
   font-family: initial;

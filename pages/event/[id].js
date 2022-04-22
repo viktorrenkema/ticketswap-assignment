@@ -1,17 +1,22 @@
+// Larger libraries
 import React from 'react'
-import Container from '~/components/Container'
+
+// Components
+import { H2, Button, Alert, AlertVariant, Text } from '@ticketswap/solar'
+import TicketAlert from '~/components/TicketAlert'
 import Cover from '~/components/Cover'
 import Footer from '~/components/Footer'
-import { H2, Button, space, Alert, AlertVariant } from '@ticketswap/solar'
+import {
+  MarginBottom16,
+  MarginBottom40,
+  FlexColStart,
+  Container,
+  HeadingWrapper,
+} from '~/components/orbit/layout'
+
+// Utilities
 import { useQuery } from '@apollo/client'
 import getEvent from '~/graphql/queries/getEvent'
-import styled from '@emotion/styled'
-import { HeadingWrapper } from '~/pages/index'
-import TicketAlert from '~/components/TicketAlert'
-
-const Margin = styled.section`
-  margin-bottom: ${space[40]};
-`
 
 const Event = ({ eventId }) => {
   const { data, loading } = useQuery(getEvent, {
@@ -45,13 +50,28 @@ const Event = ({ eventId }) => {
             Verkoop tickets
           </Button>
         </HeadingWrapper>
-        <Margin>
+        <MarginBottom40>
           <TicketAlert></TicketAlert>
-        </Margin>
+        </MarginBottom40>
         <HeadingWrapper>
           <H2>Informatie</H2>
         </HeadingWrapper>
-        <p>{description}</p>
+        {description && description}
+        {!description && (
+          <FlexColStart>
+            <MarginBottom16>
+              <Text>
+                We hebben een probleem met het ophalen van informatie voor dit
+                evenement. Iemand is al bezig om dit op te lossen, maar bij
+                vragen kan je direct contact met ons op nemen met de knop
+                hieronder.
+              </Text>
+            </MarginBottom16>
+            <Button size={'large'} variant={'primary'}>
+              Neem contact op
+            </Button>
+          </FlexColStart>
+        )}
       </Container>
       <Footer />
     </>

@@ -1,18 +1,14 @@
+// Larger libraries
 import React from 'react'
-import { useQuery } from '@apollo/client'
-import { Card, space, Spinner, device } from '@ticketswap/solar'
-import styled from '@emotion/styled'
-import getPopularEvents from '~/graphql/queries/getPopularEvents'
+
+// Components
+import { Card, Spinner } from '@ticketswap/solar'
+import { GridContainer } from './orbit/layout'
 import Link from 'next/link'
 
-const Wrapper = styled.div`
-  display: grid;
-  grid-gap: ${space[16]};
-  grid-template-columns: repeat(1, 1fr);
-  @media ${device.tablet} {
-    grid-template-columns: repeat(2, 1fr);
-  }
-`
+// Utilities
+import { useQuery } from '@apollo/client'
+import getPopularEvents from '~/graphql/queries/getPopularEvents'
 
 const PopularEvents = () => {
   const { loading, data } = useQuery(getPopularEvents, {
@@ -23,16 +19,16 @@ const PopularEvents = () => {
 
   if (loading) {
     return (
-      <Wrapper>
+      <GridContainer>
         <Spinner />
-      </Wrapper>
+      </GridContainer>
     )
   }
 
   const { popularEvents } = data
 
   return (
-    <Wrapper>
+    <GridContainer>
       {popularEvents.map(({ id, name, location, date, imageUrl }) => (
         <Link key={id} href={`/event/${id}`} passHref>
           <a>
@@ -44,7 +40,7 @@ const PopularEvents = () => {
           </a>
         </Link>
       ))}
-    </Wrapper>
+    </GridContainer>
   )
 }
 

@@ -1,7 +1,11 @@
+// Larger libraries
 import React from 'react'
-import { Alert } from '@ticketswap/solar/icons'
-import { device, color, Toggle, space, Text } from '@ticketswap/solar'
 import styled from '@emotion/styled'
+
+// Components
+import { device, color, Toggle, Text } from '@ticketswap/solar'
+import { Alert } from '@ticketswap/solar/icons'
+import { FlexColStart, FlexRowCenter } from '~/components/orbit/layout'
 
 const AlertPanel = styled.div`
   border: 1px solid ${color.stroke};
@@ -26,22 +30,15 @@ const IconWrapper = styled.div`
     height: 3rem;
   }
 `
-const Segment = styled.div`
-  display: flex;
-  align-items: center;
-`
 
-const Details = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: left;
+const Details = styled(FlexColStart)`
   margin-left: 1rem;
 `
 
 const TicketAlert = props => {
   return (
     <AlertPanel>
-      <Segment>
+      <FlexRowCenter>
         <IconWrapper>
           <Alert></Alert>
         </IconWrapper>
@@ -51,10 +48,10 @@ const TicketAlert = props => {
             Ontvang een melding wanneer een ticket beschikbaar komt
           </Text>
         </Details>
-      </Segment>
-      <Segment>
+      </FlexRowCenter>
+      <FlexRowCenter>
         <Toggle adornment={<Alert size={16} />}></Toggle>
-      </Segment>
+      </FlexRowCenter>
     </AlertPanel>
   )
 }

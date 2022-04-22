@@ -1,5 +1,10 @@
+// Larger libraries
 import React from 'react'
+
+// Components
 import Head from 'next/head'
+
+// Utilities
 import { ApolloProvider } from '@apollo/client'
 import { useApollo } from '~/graphql/client'
 import BaseStyles from '~/styles/global'

@@ -1,14 +1,18 @@
+// Larger libraries
 import React from 'react'
-import Container from '~/components/Container'
-import { useQuery } from '@apollo/client'
-import getAllEvents from '~/graphql/queries/getAllEvents'
-import { useDebounce } from '~/lib/useDebounce'
-import Cover from '~/components/Cover'
-import Footer from '~/components/Footer'
+import styled from '@emotion/styled'
+
+// Components
 import { space, sizes, Card, Spinner } from '@ticketswap/solar'
 import { WarningRounded } from '@ticketswap/solar/icons'
-import styled from '@emotion/styled'
 import AllEvents from '~/components/AllEvents'
+import Cover from '~/components/Cover'
+import Footer from '~/components/Footer'
+
+// Utilities
+import { useQuery } from '@apollo/client'
+import { useDebounce } from '~/lib/useDebounce'
+import getAllEvents from '~/graphql/queries/getAllEvents'
 
 const Wrapper = styled.div`
   display: flex;
@@ -28,14 +32,13 @@ const SearchPageContainer = styled.main`
 
 const Search = () => {
   const [query, setQuery] = React.useState('')
+  const debouncedSearch = useDebounce(query, 500)
 
   const { loading, data, refetch } = useQuery(getAllEvents, {
     variables: {
       name: '',
     },
   })
-
-  const debouncedSearch = useDebounce(query, 500)
 
   React.useEffect(
     () => {
