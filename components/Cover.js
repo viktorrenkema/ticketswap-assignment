@@ -12,6 +12,7 @@ import {
   device,
   Cover as SolarCover,
 } from '@ticketswap/solar'
+import { getNumberOfDay, getNameOfMonth } from '~/lib/convertDates'
 
 const Wrapper = styled.div`
   text-align: center;
@@ -111,6 +112,15 @@ const Cover = props => {
     )
   }
 
+  // Function that converts the new Date() to more readable format (e.g. 03 09 2021). Used for the "Datum" heading.
+  function convertDate(inputFormat) {
+    const d = new Date(inputFormat)
+    function pad(s) {
+      return s < 10 ? '0' + s : s
+    }
+    return [pad(d.getDate()), pad(d.getMonth() + 1), d.getFullYear()].join(' ')
+  }
+
   return (
     <Wrapper>
       <SolarCover imageUrl={imageUrl} alt={`An image of the ${name} event.`}>
@@ -119,7 +129,13 @@ const Cover = props => {
           <DetailsWrapper>
             <Title>{name}</Title>
             <Detail>{location}</Detail>
-            <Detail>{new Date(date).toLocaleString()}</Detail>
+            <Detail>
+              {getNumberOfDay(convertDate(date))}
+              &nbsp;
+              {getNameOfMonth(convertDate(date))}
+              &nbsp;
+              {date.substring(0, 4)}, begint om {date.substring(11, 16)}
+            </Detail>
           </DetailsWrapper>
         </CoverDetailsWrapper>
       </SolarCover>
