@@ -2,9 +2,17 @@ import React from 'react'
 import Container from '~/components/Container'
 import Cover from '~/components/Cover'
 import Footer from '~/components/Footer'
-import { Collapsible, color, fontSize, Text, space } from '@ticketswap/solar'
+import {
+  Collapsible,
+  color,
+  fontSize,
+  Text,
+  space,
+  BaseButton,
+} from '@ticketswap/solar'
 import styled from '@emotion/styled'
 import PopularEvents from '~/components/PopularEvents'
+import Link from 'next/link'
 
 const List = styled.ul`
   list-style: disc;
@@ -16,13 +24,18 @@ const Description = styled(Text)`
   margin: ${space[32]} 0 ${space[16]};
 `
 
-const SubTitle = styled.h3`
-  margin-top: ${space[32]};
-  margin-bottom: ${space[16]};
-`
+const SubTitle = styled.h3``
 
 const Emoji = styled.span`
   font-family: initial;
+`
+
+const HeadingWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: ${space[32]};
+  margin-bottom: ${space[16]};
 `
 
 const Home = () => (
@@ -114,8 +127,12 @@ const Home = () => (
           </li>
         </List>
       </Collapsible>
-
-      <SubTitle>Popular events</SubTitle>
+      <HeadingWrapper>
+        <h3>Popular events</h3>
+        <Link href={`/search`} passHref>
+          <BaseButton>Search all events</BaseButton>
+        </Link>
+      </HeadingWrapper>
       <PopularEvents />
     </Container>
 

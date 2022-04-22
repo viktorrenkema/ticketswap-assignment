@@ -1,13 +1,16 @@
 import React from 'react'
-import { Card, space } from '@ticketswap/solar'
+import { Card, space, device } from '@ticketswap/solar'
 import styled from '@emotion/styled'
 import Link from 'next/link'
 
 const Wrapper = styled.div`
-  display: flex;
-  gap: ${space[16]};
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(1, 1fr);
+
+  @media ${device.tablet} {
+    grid-template-columns: repeat(3, 1fr);
+  }
 `
 
 const AllEvents = props => {

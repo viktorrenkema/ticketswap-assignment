@@ -41,12 +41,33 @@ const CoverDetailsWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: ${space[16]};
+  width: 100%;
 `
 
 const DetailsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`
+const InputWrapper = styled.div`
+  width: 100%;
+  position: relative;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  max-width: 48rem;
+`
+
+const TitleWrapper = styled.div`
+  text-align: center;
+  margin: 2rem 0;
+  margin-bottom: 1.5rem;
+  text-align: left;
+  margin-top: 2rem;
+  padding: 0 1rem;
+  margin: 1rem 0;
+  text-shadow: 0px 1px 4px rgb(0 0 0 / 30%), 0px 2px 13px rgb(0 0 0 / 30%),
+    0px 3px 23px rgb(0 0 0 / 30%);
 `
 
 const Cover = props => {
@@ -65,20 +86,22 @@ const Cover = props => {
     return (
       <Wrapper>
         <SolarCover imageUrl="https://cdn.ticketswap.com/public/201706/ab89e741-cc69-4c2e-88bc-3d4c807acef2.jpeg">
-          {/* <CoverDetailsWrapper> */}
-          <TicketSwap size={64} />
-          <Title>Zoek door alle evenementen</Title>
-          {/* <div style={{ height: 100, width: '100%', backgroundColor: '#09f' }}> */}
-          <Input
-            onChange={event => setQuery(event.target.value)}
-            placeholder="Zoek naar een event"
-            id="search"
-            label="Search"
-            hideLabel
-            leftAdornment={<MagnifyingGlass size={24} />}
-          />
-          {/* </div> */}
-          {/* </CoverDetailsWrapper> */}
+          <CoverDetailsWrapper>
+            <TicketSwap size={64} />
+            <TitleWrapper>
+              <Title>Veilig tickets kopen en verkopen</Title>
+            </TitleWrapper>
+            <InputWrapper>
+              <Input
+                onChange={event => setQuery(event.target.value)}
+                placeholder="Zoek naar evenementen, locaties, of steden"
+                id="search"
+                label="Search"
+                hideLabel
+                leftAdornment={<MagnifyingGlass size={24} />}
+              />
+            </InputWrapper>
+          </CoverDetailsWrapper>
         </SolarCover>
       </Wrapper>
     )
