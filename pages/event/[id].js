@@ -2,14 +2,7 @@ import React from 'react'
 import Container from '~/components/Container'
 import Cover from '~/components/Cover'
 import Footer from '~/components/Footer'
-import {
-  H2,
-  Button,
-  space,
-  color,
-  Alert,
-  AlertVariant,
-} from '@ticketswap/solar'
+import { H2, Button, space, Alert, AlertVariant } from '@ticketswap/solar'
 import { useQuery } from '@apollo/client'
 import getEvent from '~/graphql/queries/getEvent'
 import styled from '@emotion/styled'
@@ -40,7 +33,7 @@ const Event = ({ eventId }) => {
           variant={AlertVariant.warning}
           action={{
             label: 'Activeer alert',
-            onClick: () => console.log('Alert geactiveerd'),
+            onClick: () => window.alert('Alert geactiveerd'),
           }}
         >
           Dit evenement heeft momenteel geen beschikbare kaarten. Zet een alert
@@ -66,7 +59,6 @@ const Event = ({ eventId }) => {
 }
 
 export const getServerSideProps = async ({ params }) => {
-  console.log('params', params)
   return {
     props: {
       eventId: params.id,
