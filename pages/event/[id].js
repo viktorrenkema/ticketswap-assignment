@@ -3,12 +3,12 @@ import Container from '~/components/Container'
 import Cover from '~/components/Cover'
 import Footer from '~/components/Footer'
 import { H2, H5, Image, Text } from '@ticketswap/solar'
-import { useQuery, gql } from '@apollo/client'
-import getEvent from '~/graphql/queries/getEvent'
+import { gql } from '@apollo/client'
 import { initializeApollo, addApolloState } from '~/graphql/client'
-import { schema } from '~/graphql/schema'
 
-const Event = ({ eventId, name, date, location, imageUrl, description }) => {
+const Event = props => {
+  const { name, date, location, imageUrl, description } = props.data.data.event
+
   return (
     <>
       <Cover />
@@ -45,19 +45,17 @@ const MY_QUERY = gql`
 export const getServerSideProps = async ({ params }) => {
   const client = initializeApollo()
 
-  // console.log('query', MY_QUERY)
-
-  await client
-    .query({
-      query: MY_QUERY,
-      variables: {
-        id: parseInt(params.id),
-      },
-    })
-    .then(r => console.log('reso', r))
+  const data = await client.query({
+    query: MY_QUERY,
+    variables: {
+      id: 1,
+    },
+  })
 
   return addApolloState(client, {
-    props: {},
+    props: {
+      data,
+    },
   })
 }
 
