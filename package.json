@@ -14,7 +14,7 @@
     "@graphql-tools/schema": "^8.3.8",
     "@ticketswap/solar": "^24.0.1",
     "apollo-server-micro": "^3.6.7",
-    "graphql": "^16.3.0",
+    "graphql": "15.8.0",
     "lodash": "^4.17.21",
     "micro": "^9.3.4",
     "next": "^12.1.5",

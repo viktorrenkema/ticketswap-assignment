@@ -15,19 +15,12 @@ import {
 } from '~/components/orbit/layout'
 
 // Utilities
-import { useQuery } from '@apollo/client'
-import getEvent from '~/graphql/queries/getEvent'
+import { H2, H5, Image, Text } from '@ticketswap/solar'
+import { gql } from '@apollo/client'
+import { initializeApollo, addApolloState } from '~/graphql/client'
 
-const Event = ({ eventId }) => {
-  const { data, loading } = useQuery(getEvent, {
-    variables: {
-      id: parseInt(eventId),
-    },
-  })
-
-  if (loading || !data.event) return null
-
-  const { name, date, location, imageUrl, description } = data.event
+const Event = props => {
+  const { name, date, location, imageUrl, description } = props.data.data.event
 
   return (
     <>
@@ -78,12 +71,34 @@ const Event = ({ eventId }) => {
   )
 }
 
-export const getServerSideProps = async ({ params }) => {
-  return {
-    props: {
-      eventId: params.id,
-    },
+const MY_QUERY = gql`
+  query getEvent($id: Int!) {
+    event(id: $id) {
+      id
+      name
+      date
+      location
+      imageUrl
+      description
+    }
   }
+`
+
+export const getServerSideProps = async ({ params }) => {
+  const client = initializeApollo()
+
+  const data = await client.query({
+    query: MY_QUERY,
+    variables: {
+      id: 1,
+    },
+  })
+
+  return addApolloState(client, {
+    props: {
+      data,
+    },
+  })
 }
 
 export default Event
