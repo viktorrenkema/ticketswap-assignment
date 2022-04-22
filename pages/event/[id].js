@@ -15,7 +15,6 @@ import {
 } from '~/components/orbit/layout'
 
 // Utilities
-import { H2, H5, Image, Text } from '@ticketswap/solar'
 import { gql } from '@apollo/client'
 import { initializeApollo, addApolloState } from '~/graphql/client'
 
@@ -90,7 +89,7 @@ export const getServerSideProps = async ({ params }) => {
   const data = await client.query({
     query: MY_QUERY,
     variables: {
-      id: 1,
+      id: parseFloat(params.id),
     },
   })
 
