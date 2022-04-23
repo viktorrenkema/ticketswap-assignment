@@ -15,8 +15,8 @@ import {
 } from '~/components/orbit/layout'
 
 // Utilities
-import { gql } from '@apollo/client'
 import { initializeApollo, addApolloState } from '~/graphql/client'
+import getEvent from '~/graphql/queries/getEvent'
 
 const Event = props => {
   const { name, date, location, imageUrl, description } = props.data.data.event
@@ -70,24 +70,11 @@ const Event = props => {
   )
 }
 
-const MY_QUERY = gql`
-  query getEvent($id: Int!) {
-    event(id: $id) {
-      id
-      name
-      date
-      location
-      imageUrl
-      description
-    }
-  }
-`
-
 export const getServerSideProps = async ({ params }) => {
   const client = initializeApollo()
 
   const data = await client.query({
-    query: MY_QUERY,
+    query: getEvent,
     variables: {
       id: parseFloat(params.id),
     },

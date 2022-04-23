@@ -63,8 +63,8 @@ const Search = () => {
       <SearchPageContainer>
         <Card
           leftAdornment={<WarningRounded size={24} />}
-          title="Let op covid-19 maatregelen."
-          description="Regulaties omtrent covid-19 verschillen per locatie. Houd de website van het evenement goed in de gaten."
+          title="Covid-19 regulaties opgeheven."
+          description="In Nederland zijn er geen maatregelen meer omtrent covid-19."
         ></Card>
         <AllEvents allEvents={allEvents}></AllEvents>
       </SearchPageContainer>

@@ -5,6 +5,7 @@ import styled from '@emotion/styled'
 // Components
 import { Card, device } from '@ticketswap/solar'
 import { GridContainer } from './orbit/layout'
+import NoSearchResults from './NoSearchResults'
 import Link from 'next/link'
 
 const GridContainerCol3 = styled(GridContainer)`
@@ -15,6 +16,8 @@ const GridContainerCol3 = styled(GridContainer)`
 
 const AllEvents = props => {
   const { allEvents } = props
+
+  const noResults = allEvents.length === 0
 
   return (
     <GridContainerCol3>
@@ -29,6 +32,7 @@ const AllEvents = props => {
           </a>
         </Link>
       ))}
+      {noResults && <NoSearchResults></NoSearchResults>}
     </GridContainerCol3>
   )
 }

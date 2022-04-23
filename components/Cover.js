@@ -56,7 +56,6 @@ const TitleWrapper = styled.div`
   text-align: center;
   margin: 2rem 0;
   margin-bottom: 1.5rem;
-  text-align: left;
   margin-top: 2rem;
   padding: 0 1rem;
   margin: 1rem 0;
