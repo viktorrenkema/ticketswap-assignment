@@ -5,7 +5,6 @@ import styled from '@emotion/styled'
 // Components
 import {
   Collapsible,
-  color,
   fontSize,
   Text,
   space,

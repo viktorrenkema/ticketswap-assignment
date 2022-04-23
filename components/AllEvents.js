@@ -1,11 +1,12 @@
 // Larger libraries
 import React from 'react'
 import styled from '@emotion/styled'
+import propTypes from 'prop-types'
 
 // Components
 import { Card, device } from '@ticketswap/solar'
 import { GridContainer } from './orbit/layout'
-import NoSearchResults from './NoSearchResults'
+import EmptyState from './EmptyState'
 import Link from 'next/link'
 
 const GridContainerCol3 = styled(GridContainer)`
@@ -32,9 +33,13 @@ const AllEvents = props => {
           </a>
         </Link>
       ))}
-      {noResults && <NoSearchResults></NoSearchResults>}
+      {noResults && <EmptyState></EmptyState>}
     </GridContainerCol3>
   )
 }
 
 export default AllEvents
+
+AllEvents.propTypes = {
+  allEvents: propTypes.array,
+}

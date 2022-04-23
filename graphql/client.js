@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
-import { ApolloClient, InMemoryCache } from '@apollo/client'
+import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client'
 import { schema } from './schema'
+import { SchemaLink } from '@apollo/client/link/schema'
 
 export const APOLLO_STATE_PROP_NAME = '__APOLLO_STATE__'
 
@@ -8,10 +9,8 @@ let apolloClient
 
 function createIsomorphLink() {
   if (typeof window === 'undefined') {
-    const { SchemaLink } = require('@apollo/client/link/schema')
     return new SchemaLink({ schema })
   } else {
-    const { HttpLink } = require('@apollo/client/link/http')
     return new HttpLink({
       uri: '/api/graphql',
       credentials: 'same-origin',

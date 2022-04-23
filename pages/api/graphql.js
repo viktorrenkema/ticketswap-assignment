@@ -1,4 +1,4 @@
-import { ApolloServer, gql, makeExecutableSchema } from 'apollo-server-micro'
+import { ApolloServer } from 'apollo-server-micro'
 import { schema } from '~/graphql/schema'
 
 export const config = {

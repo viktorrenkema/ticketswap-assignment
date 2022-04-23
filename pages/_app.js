@@ -1,5 +1,6 @@
 // Larger libraries
 import React from 'react'
+import propTypes from 'prop-types'
 
 // Components
 import Head from 'next/head'
@@ -24,4 +25,9 @@ export default function App({ Component, pageProps }) {
       <Component {...pageProps} />
     </ApolloProvider>
   )
+}
+
+App.propTypes = {
+  Component: propTypes.func,
+  pageProps: propTypes.object,
 }

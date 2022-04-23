@@ -17,6 +17,7 @@ import { FlexColCenter, CoverContainer } from './orbit/layout'
 
 // Utilities
 import { getNumberOfDay, getNameOfMonth, convertDate } from '~/lib/convertDates'
+import propTypes from 'prop-types'
 
 const Title = styled(H1)`
   color: ${color.lightForeground};
@@ -123,3 +124,12 @@ const Cover = props => {
 }
 
 export default Cover
+
+Cover.propTypes = {
+  date: propTypes.string,
+  page: propTypes.string,
+  name: propTypes.string,
+  imageUrl: propTypes.string,
+  setQuery: propTypes.func,
+  location: propTypes.string,
+}

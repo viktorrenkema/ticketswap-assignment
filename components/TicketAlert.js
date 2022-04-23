@@ -35,7 +35,7 @@ const Details = styled(FlexColStart)`
   margin-left: 1rem;
 `
 
-const TicketAlert = props => {
+const TicketAlert = () => {
   return (
     <AlertPanel>
       <FlexRowCenter>

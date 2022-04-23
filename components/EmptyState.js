@@ -3,13 +3,9 @@ import React from 'react'
 import styled from '@emotion/styled'
 
 // Components
-import { H3, H4, H5, device, color, Text, Button } from '@ticketswap/solar'
+import { H3, color, Text, Button } from '@ticketswap/solar'
 import { Calendar } from '@ticketswap/solar/icons'
-import { FlexColCenter, FlexColStart } from '~/components/orbit/layout'
-
-const Details = styled(FlexColStart)`
-  margin-left: 1rem;
-`
+import { FlexColCenter } from '~/components/orbit/layout'
 
 const PaddedText = styled(Text)`
   margin-top: 0.25rem;
@@ -17,9 +13,13 @@ const PaddedText = styled(Text)`
   text-align: center;
 `
 
-const NoSearchResults = props => {
+const EmptyStateWrapper = styled(FlexColCenter)`
+  grid-column: 1 / 4;
+`
+
+const EmptyState = () => {
   return (
-    <FlexColCenter>
+    <EmptyStateWrapper>
       <H3>Geen resultaten gevonden</H3>
       <PaddedText style={{ color: color.foregroundMuted, fontSize: '1rem' }}>
         Probeer opnieuw te zoeken op evenementen, locaties en steden
@@ -31,8 +31,8 @@ const NoSearchResults = props => {
       >
         Neem contact op
       </Button>
-    </FlexColCenter>
+    </EmptyStateWrapper>
   )
 }
 
-export default NoSearchResults
+export default EmptyState
