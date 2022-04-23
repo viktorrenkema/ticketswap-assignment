@@ -18,13 +18,11 @@ export const resolvers = {
     allEvents(_parent, args) {
       const { name } = args
 
-      let lowerCaseName
-
       if (name) {
-        lowerCaseName = name.toLowerCase()
+        let lowerCaseQuery = name.toLowerCase()
 
-        var filteredEvents = _.filter(events, event => {
-          return event.name.toLowerCase().indexOf(lowerCaseName) > -1
+        let filteredEvents = _.filter(events, event => {
+          return event.name.toLowerCase().indexOf(lowerCaseQuery) > -1
         })
 
         return filteredEvents
