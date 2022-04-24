@@ -38,7 +38,7 @@ const Home = () => (
         <strong>Welcome to the TicketSwap challenger.</strong> The goal of this
         challenger is to finish the todo list stated below <Emoji>☑️</Emoji> Of
         course if you see anything that can be improved apart from the todo
-        list, you're welcome to do so <Emoji>☺️</Emoji>
+        list, you&apos;re welcome to do so <Emoji>☺️</Emoji>
       </Description>
 
       <Collapsible buttonLabel="Todo list">
@@ -80,8 +80,8 @@ const Home = () => (
         <List>
           <li>
             We are using our own component library in this project, if you want
-            to check it out go to. Within this project you'll find our icons as
-            well.
+            to check it out go to. Within this project you&apos;ll find our
+            icons as well.
             <ul>
               <li>
                 <a href="https://github.com/TicketSwap/solar">Github Solar</a>
