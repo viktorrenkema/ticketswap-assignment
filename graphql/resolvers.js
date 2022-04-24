@@ -1,5 +1,4 @@
 import { events } from './mock-data'
-import _ from 'lodash'
 
 export const resolvers = {
   Query: {
