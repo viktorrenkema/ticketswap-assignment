@@ -18,12 +18,18 @@ export const resolvers = {
     allEvents(_parent, args) {
       const { name } = args
 
-      if (name) {
-        let lowerCaseQuery = name.toLowerCase()
+      let lowerCaseName
 
-        let filteredEvents = _.filter(events, event => {
-          return event.name.toLowerCase().indexOf(lowerCaseQuery) > -1
-        })
+      if (name) {
+        lowerCaseName = name.toLowerCase()
+
+        let filteredEvents = events.filter(
+          event =>
+            // With (event.name || '') we add a check whether event.name exists (not null), otherwise the filter method will trip up and return nothing
+            (event.name || '').toLowerCase().indexOf(lowerCaseName) > -1 ||
+            (event.location || '').toLowerCase().indexOf(lowerCaseName) > -1 ||
+            (event.date || '').toLowerCase().indexOf(lowerCaseName) > -1
+        )
 
         return filteredEvents
       } else return events
