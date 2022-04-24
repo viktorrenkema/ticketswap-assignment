@@ -1,5 +1,6 @@
 // Larger libraries
 import React from 'react'
+import propTypes from 'prop-types'
 
 // Components
 import { H2, Button, Alert, AlertVariant, Text } from '@ticketswap/solar'
@@ -88,3 +89,13 @@ export const getServerSideProps = async ({ params }) => {
 }
 
 export default Event
+
+Event.propTypes = {
+  name: propTypes.string,
+  date: propTypes.string,
+  location: propTypes.string,
+  imageUrl: propTypes.string,
+  description: propTypes.string,
+  props: propTypes.object,
+  data: propTypes.object,
+}
