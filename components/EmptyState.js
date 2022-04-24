@@ -11,6 +11,7 @@ const PaddedText = styled(Text)`
   margin-top: 0.25rem;
   margin-bottom: 1rem;
   text-align: center;
+  color: ${color.foregroundMuted};
 `
 
 const EmptyStateWrapper = styled(FlexColCenter)`
@@ -21,7 +22,7 @@ const EmptyState = () => {
   return (
     <EmptyStateWrapper>
       <H3>Geen resultaten gevonden</H3>
-      <PaddedText style={{ color: color.foregroundMuted, fontSize: '1rem' }}>
+      <PaddedText>
         Probeer opnieuw te zoeken op evenementen, locaties en steden
       </PaddedText>
       <Button

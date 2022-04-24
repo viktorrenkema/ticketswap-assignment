@@ -35,6 +35,14 @@ const Details = styled(FlexColStart)`
   margin-left: 1rem;
 `
 
+const AlertTitle = styled(Text)`
+  font-weight: 500;
+`
+
+const AlertDescription = styled(Text)`
+  color: ${color.foregroundMuted};
+`
+
 const TicketAlert = () => {
   return (
     <AlertPanel>
@@ -43,10 +51,10 @@ const TicketAlert = () => {
           <Alert />
         </IconWrapper>
         <Details>
-          <Text style={{ fontWeight: '500' }}>Ticket alerts</Text>
-          <Text style={{ color: color.foregroundMuted, fontSize: '1rem' }}>
+          <AlertTitle>Ticket alerts</AlertTitle>
+          <AlertDescription>
             Ontvang een melding wanneer een ticket beschikbaar komt
-          </Text>
+          </AlertDescription>
         </Details>
       </FlexRowCenter>
       <FlexRowCenter>
