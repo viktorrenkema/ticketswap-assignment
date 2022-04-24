@@ -43,7 +43,7 @@ const Event = props => {
           </Button>
         </HeadingWrapper>
         <MarginBottom40>
-          <TicketAlert></TicketAlert>
+          <TicketAlert />
         </MarginBottom40>
         <HeadingWrapper>
           <H2>Informatie</H2>

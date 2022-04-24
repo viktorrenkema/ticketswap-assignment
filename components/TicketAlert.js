@@ -40,7 +40,7 @@ const TicketAlert = () => {
     <AlertPanel>
       <FlexRowCenter>
         <IconWrapper>
-          <Alert></Alert>
+          <Alert />
         </IconWrapper>
         <Details>
           <Text style={{ fontWeight: '500' }}>Ticket alerts</Text>
@@ -50,7 +50,7 @@ const TicketAlert = () => {
         </Details>
       </FlexRowCenter>
       <FlexRowCenter>
-        <Toggle adornment={<Alert size={16} />}></Toggle>
+        <Toggle adornment={<Alert size={16} />} />
       </FlexRowCenter>
     </AlertPanel>
   )

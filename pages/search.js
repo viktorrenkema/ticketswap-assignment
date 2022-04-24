@@ -59,14 +59,14 @@ const Search = () => {
 
   return (
     <>
-      <Cover page="search" setQuery={setQuery}></Cover>
+      <Cover page="search" setQuery={setQuery} />
       <SearchPageContainer>
         <Card
           leftAdornment={<WarningRounded size={24} />}
           title="Covid-19 regulaties opgeheven."
           description="In Nederland zijn er geen maatregelen meer omtrent covid-19."
-        ></Card>
-        <AllEvents allEvents={allEvents}></AllEvents>
+        />
+        <AllEvents allEvents={allEvents} />
       </SearchPageContainer>
       <Footer />
     </>

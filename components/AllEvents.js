@@ -33,7 +33,7 @@ const AllEvents = props => {
           </a>
         </Link>
       ))}
-      {noResults && <EmptyState></EmptyState>}
+      {noResults && <EmptyState />}
     </GridContainerCol3>
   )
 }
