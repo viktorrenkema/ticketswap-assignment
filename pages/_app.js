@@ -16,7 +16,7 @@ export default function App({ Component, pageProps }) {
   return (
     <ApolloProvider client={apolloClient}>
       <Head>
-        <title>Create Next App</title>
+        <title>Ticketswap Challenger</title>
         <link rel="icon" href="/favicon.png" />
       </Head>
 
