@@ -14,6 +14,7 @@ import {
   Cover as SolarCover,
 } from '@ticketswap/solar'
 import { FlexColCenter, CoverContainer } from './orbit/layout'
+import Link from 'next/link'
 
 // Utilities
 import { getNumberOfDay, getNameOfMonth, convertDate } from '~/lib/convertDates'
@@ -64,6 +65,10 @@ const TitleWrapper = styled.div`
     0px 3px 23px rgb(0 0 0 / 30%);
 `
 
+const TicketSwapLogo = styled.div`
+  cursor: pointer;
+`
+
 const Cover = props => {
   let { page, name, date, imageUrl, location, setQuery } = props
 
@@ -81,7 +86,11 @@ const Cover = props => {
       <CoverContainerWithImage>
         <SolarCover imageUrl="https://cdn.ticketswap.com/public/201706/ab89e741-cc69-4c2e-88bc-3d4c807acef2.jpeg">
           <CoverDetailsWrapper>
-            <TicketSwap size={64} />
+            <Link href={`/`} passHref>
+              <TicketSwapLogo>
+                <TicketSwap size={64} />
+              </TicketSwapLogo>
+            </Link>
             <TitleWrapper>
               <Title>Veilig tickets kopen en verkopen</Title>
             </TitleWrapper>
@@ -105,7 +114,11 @@ const Cover = props => {
     <CoverContainerWithImage>
       <SolarCover imageUrl={imageUrl} alt={`An image of the ${name} event.`}>
         <CoverDetailsWrapper>
-          <TicketSwap size={64} />
+          <Link href={`/`} passHref>
+            <TicketSwapLogo>
+              <TicketSwap size={64} />
+            </TicketSwapLogo>
+          </Link>
           <FlexColCenter>
             <Title>{name}</Title>
             <Detail>{location}</Detail>
