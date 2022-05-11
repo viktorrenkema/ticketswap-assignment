@@ -31,35 +31,8 @@ const SearchPageContainer = styled.main`
 `
 
 const Search = () => {
-  const [query, setQuery] = React.useState('')
-  const debouncedSearch = useDebounce(query, 500)
-
-  const { loading, data, refetch } = useQuery(getAllEvents, {
-    variables: {
-      name: '',
-    },
-  })
-
-  React.useEffect(
-    () => {
-      refetch({ name: debouncedSearch })
-    },
-    [debouncedSearch, refetch] // Only call effect if debounced search term changes
-  )
-
-  if (loading) {
-    return (
-      <Wrapper>
-        <Spinner />
-      </Wrapper>
-    )
-  }
-
-  const { allEvents } = data
-
   return (
     <>
-      <Cover page="search" setQuery={setQuery} />
       <SearchPageContainer>
         <Card
           leftAdornment={<WarningRounded size={24} />}
